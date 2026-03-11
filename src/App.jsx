@@ -10,6 +10,9 @@ export default function App() {
   const [inputValue, setInputValue] = useState("");
   const [qtyValue, setQtyValue] = useState(1);
   const [sortBy, setSortBy] = useState("input");
+  const packedCount = items.filter((item) => item.packed).length;
+  const progress = items.length === 0 ? 0 : Math.round((packedCount / items.length) * 100);
+  
 
   // Function
   const addItems = (e) => {
@@ -29,6 +32,7 @@ export default function App() {
     setInputValue("");
     setQtyValue(1);
   };
+
   const togglePacked = (id) => {
     setItems(
       items.map((item) =>
@@ -36,9 +40,24 @@ export default function App() {
       ),
     );
   };
+  
   const removeItem = (id) => {
     setItems(items.filter((item) => item.id !== id));
   };
+
+  const editItem = (id, newName, newQty) => {
+    const qtyNumber = Number(newQty);
+    if( !newName?.trim() || !Number.isFinite(qtyNumber) || qtyNumber <= 0) {
+      return;
+    }
+    setItems(
+      items.map((item) => 
+        item.id === id ? { ...item, name: newName, qty: qtyNumber } : item
+      )
+    );
+  };
+
+  
   let sortedItems;
   if (sortBy === "input") {
     sortedItems = items;
@@ -69,6 +88,8 @@ export default function App() {
         setSortBy={setSortBy}
         totalItems={items.length}
         removeItem={removeItem}
+        progress={progress}
+        editItem={editItem}
       />
       
     </div>
