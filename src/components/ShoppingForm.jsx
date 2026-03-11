@@ -14,7 +14,7 @@ function ShoppingForm({ onSubmit, inputValue, setInputValue, qtyValue, setQtyVal
         placeholder="Qty"
         min={1}
         value={qtyValue}
-        onChange={(e) => setQtyValue(parseInt(e.target.value) || 1)}
+        onChange={(e) => setQtyValue(parseInt(e.target.value) || 0)}
       />
       <button type="submit">Add Item</button>
     </form>

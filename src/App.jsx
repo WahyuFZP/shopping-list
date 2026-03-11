@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useLocalStorage} from "./hook/useLocalStorage";
 import Header from "./components/header";
 import ShoppingForm from "./components/ShoppingForm";
 import ContentList from "./components/ContentList";
 
+
 export default function App() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useLocalStorage("shoppingItems", []);
   const [inputValue, setInputValue] = useState("");
   const [qtyValue, setQtyValue] = useState(1);
   const [sortBy, setSortBy] = useState("input");
@@ -44,8 +46,8 @@ export default function App() {
     sortedItems = [...items].sort((a, b) => a.name.localeCompare(b.name));
   } else if (sortBy === "qty") {
     sortedItems = [...items].sort((a, b) => b.qty - a.qty);
-  } else {
-    sortedItems = items;
+  } else if (sortBy === "packed") {
+    sortedItems = [...items].sort((a, b) => b.packed - a.packed);
   }
 
   return (
