@@ -15,8 +15,9 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
-  padding: 20px;
+  min-height: 100dvh;
+  padding: 12px;
+  justify-content: center;
 }
 
 .app {
@@ -24,7 +25,7 @@ body {
   margin: 0 auto;
   background: white;
   border-radius: 12px;
-  padding: 30px;
+  padding: 20px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
@@ -36,20 +37,42 @@ h1 {
 
 .shopping-form {
   background: #f7f7f7;
-  padding: 20px;
+  padding: 14px;
   border-radius: 8px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .shopping-form h3 {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   color: #333;
+}
+
+.shopping-form-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.shopping-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.shopping-form-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.shopping-form-field-qty {
+  flex: 0 0 90px;
 }
 
 .shopping-form input,
 .shopping-form button {
   padding: 10px;
-  margin-right: 10px;
   border: 2px solid #ddd;
   border-radius: 6px;
   font-size: 16px;
@@ -61,7 +84,7 @@ h1 {
 }
 
 .shopping-form input[type="number"] {
-  width: 80px;
+  width: 100%;
   flex: none;
 }
 
@@ -82,6 +105,15 @@ h1 {
   min-height: 200px;
 }
 
+/* .sort-control {
+  min-height: 36px;
+  margin: 10px 0 12px;
+}
+
+.sort-control [data-slot="select-trigger"] {
+  width: 25%;
+} */
+
 .list ul {
   list-style: none;
 }
@@ -90,8 +122,8 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px;
-  margin-bottom: 10px;
+  padding: 12px;
+  margin-bottom: 8px;
   background: #f9f9f9;
   border-radius: 6px;
   transition: all 0.3s;
@@ -99,7 +131,7 @@ h1 {
 
 .list li:hover {
   background: #f0f0f0;
-  transform: translateX(5px);
+    translate: 5px 0;
 }
 
 .list li.packed {
@@ -193,13 +225,13 @@ h1 {
 }
 
 .stats {
-  margin-top: 30px;
-  padding: 20px;
+  margin-top: 16px;
+  padding: 14px;
   background: #667eea;
   color: white;
   border-radius: 8px;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
 }
 
