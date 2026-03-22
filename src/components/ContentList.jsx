@@ -29,6 +29,9 @@ function ContentList({
   removeItem,
   progress,
   editItem,
+  currentPage,
+  setCurrentPage,
+  totalPages,
 }) {
   return (
     <div className="list space-y-5">
@@ -84,9 +87,45 @@ function ContentList({
       <div className="stats">
         <p>Total items: {totalItems}</p>
       </div>
-      <p>
-                
-      </p>
+
+      {/* PAGINATION */}
+      {totalPages > 1 && (
+        <Pagination>
+          <PaginationContent>
+            {/* Previous Button */}
+            <PaginationItem>
+              <PaginationPrevious
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                href="#"
+              />
+            </PaginationItem>
+
+            {/* Page Numbers */}
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <PaginationItem key={page}>
+                <PaginationLink
+                  isActive={page === currentPage}
+                  onClick={() => setCurrentPage(page)}
+                  href="#"
+                  className="cursor-pointer"
+                >
+                  {page}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+
+            {/* Next Button */}
+            <PaginationItem>
+              <PaginationNext
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                href="#"
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 }

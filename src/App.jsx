@@ -68,7 +68,10 @@ export default function App() {
     // }
 
   const {
-    sortedItems,
+    paginatedItems,
+    currentPage,
+    setCurrentPage,
+    totalPages,
     inputValue,
     setInputValue,
     qtyValue,
@@ -79,7 +82,8 @@ export default function App() {
     addItems,
     togglePacked,
     removeItem,
-    editItem
+    editItem,
+    sortedItems
   } = useShoppingList();
 
   return (
@@ -95,7 +99,7 @@ export default function App() {
       />
 
       <ContentList
-        items={sortedItems}
+        items={paginatedItems}
         togglePacked={togglePacked}
         sortBy={sortBy}
         setSortBy={setSortBy}
@@ -103,6 +107,9 @@ export default function App() {
         removeItem={removeItem}
         progress={progress}
         editItem={editItem}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
       />
       
     </div>

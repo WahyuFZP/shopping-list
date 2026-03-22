@@ -6,6 +6,8 @@ export function useShoppingList() {
     const [inputValue, setInputValue] = useState("");
     const [qtyValue, setQtyValue] = useState(1);
     const [sortBy, setSortBy] = useState("input");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(5);
     const packedCount = items.filter((item) => item.packed).length;
     const progress = items.length === 0 ? 0 : Math.round((packedCount / items.length) * 100);
 
@@ -55,14 +57,31 @@ export function useShoppingList() {
         sortedItems = [...items].sort((a, b) => a.packed - b.packed);
     }
 
+    // Pagination logic
+    const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedItems = sortedItems.slice(startIndex, endIndex);
+
+    // Reset page ke 1 jika sortBy berubah
+    const handleSortChange = (newSort) => {
+        setSortBy(newSort);
+        setCurrentPage(1);
+    };
+
     return {
         sortedItems,
+        paginatedItems,
+        currentPage,
+        setCurrentPage,
+        totalPages,
+        itemsPerPage,
         inputValue,
         setInputValue,
         qtyValue,
         setQtyValue,
         sortBy,
-        setSortBy,
+        setSortBy: handleSortChange,
         packedCount,
         progress,
         addItems,
